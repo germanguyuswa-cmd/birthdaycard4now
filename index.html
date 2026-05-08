@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="de">
 
 <head>
@@ -377,13 +377,11 @@
                     document.querySelector("button")
                         .style.display = "none";
 
-                    giftArea.innerHTML =
-
-                        '<div class="gift">' +
-
-                        '<img src="qr.png">' +
-
-                        '</div>';
+                    giftArea.innerHTML = `
+                        <div class="gift">
+                        <img src="./qr.png" 
+                        alt="QR Code">
+                        </div>`;
 
                     createConfetti();
 
