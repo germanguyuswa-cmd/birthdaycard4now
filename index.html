@@ -236,74 +236,95 @@
         }
         
         function checkAnswer() {
-            const answerInput = document.getElementById("answer");
-            const answer = answerInput.value.toLowerCase().trim();
-            const question = document.getElementById("question");
-            const result = document.getElementById("result");
-            const birthdayMessage = document.getElementById("birthdayMessage");
-            
-            // ---------- RIDDLE 1 ----------
-            if (stage === 1) {
-                // Answer for first riddle: "motor" or "engine"
-                if (answer === "motor" || answer === "engine" || answer === "auto") {
-                    successSound.play();
-                    result.style.color = "#00ff9d";
-                    result.innerText = "✅ ENGINE ACCESS GRANTED! ✅";
-                    
-                    // Update question to second riddle
-                    question.innerHTML =
-                        "Je stärker ich aufdrehe,<br>" +
-                        "desto schneller drehe ich mich,<br>" +
-                        "und doch komme ich nie voran.<br>" +
-                        "Was bin ich?";
-                    
-                    answerInput.value = "";
-                    stage = 2;
-                    stageIndicator.innerHTML = "🎯 Stage 2/2";
-                    stageIndicator.style.color = "#ffd166";
-                    
-                    // Clear message after 2 seconds
-                    setTimeout(() => {
-                        result.innerText = "";
-                    }, 2000);
-                    
-                } else {
-                    glitchSound.play();
-                    errorSound.play();
-                    result.style.color = "#ff6b6b";
-                    result.innerText = "❌ ACCESS DENIED! ❌";
-                    
-                    question.classList.add("glitch");
-                    
-                    setTimeout(() => {
-                        question.classList.remove("glitch");
-                        result.innerText = "";
-                    }, 1000);
-                }
-            }
-            
-            // ---------- RIDDLE 2 ----------
-            // Show birthday message with celebration
-question.innerHTML =
-    "🎉🎂 HERZLICHEN GLÜCKWUNSCH! 🎂🎉<br><br>" +
-    "Du hast die Rätsel gelöst!<br>" +
-    "Hier ist dein Geschenk! 🎁";
+    const answerInput = document.getElementById("answer");
+    const answer = answerInput.value.toLowerCase().trim();
+    const question = document.getElementById("question");
+    const result = document.getElementById("result");
+    const birthdayMessage = document.getElementById("birthdayMessage");
 
-// Hide input and button
-document.querySelector(".input-area").style.display = "none";
+    // ---------- RIDDLE 1 ----------
+    if (stage === 1) {
+        if (answer === "motor" || answer === "engine" || answer === "auto") {
+            successSound.play();
+            result.style.color = "#00ff9d";
+            result.innerText = "✅ ENGINE ACCESS GRANTED! ✅";
 
-// Add gift box animation AND your QR code
-birthdayMessage.innerHTML = `
-    <div class="gift-box">
-        🎁🎈🎊
-    </div>
-    <div style="margin-top: 20px; font-size: 1.3em;">
-        Alles Gute zum Geburtstag! 🎂
-    </div>
-    <div style="margin-top: 30px;">
-        <img src="qrcode (5).png" alt="Your Gift" style="width: 200px; border-radius: 10px; border: 3px solid #ff6b6b; box-shadow: 0 0 20px rgba(255,107,107,0.5);">
-    </div>
-`;
+            question.innerHTML =
+                "Je stärker ich aufdrehe,<br>" +
+                "desto schneller drehe ich mich,<br>" +
+                "und doch komme ich nie voran.<br>" +
+                "Was bin ich?";
+
+            answerInput.value = "";
+            stage = 2;
+            stageIndicator.innerHTML = "🎯 Stage 2/2";
+            stageIndicator.style.color = "#ffd166";
+
+            setTimeout(() => {
+                result.innerText = "";
+            }, 2000);
+
+        } else {
+            glitchSound.play();
+            errorSound.play();
+            result.style.color = "#ff6b6b";
+            result.innerText = "❌ ACCESS DENIED! ❌";
+            question.classList.add("glitch");
+            setTimeout(() => {
+                question.classList.remove("glitch");
+                result.innerText = "";
+            }, 1000);
+        }
+    }
+
+    // ---------- RIDDLE 2 ----------
+    else if (stage === 2) {
+        // This is the part that was missing!
+        if (answer === "rad" || answer === "wheel" || answer === "reifen" || answer === "turbelader" || answer === "turbo") {
+            
+            successSound.play();
+            result.style.color = "#00ff9d";
+            result.innerText = "🎉 GARAGE UNLOCKED! 🎉";
+
+            question.innerHTML =
+                "🎉🎂 HERZLICHEN GLÜCKWUNSCH! 🎂🎉<br><br>" +
+                "Du hast die Rätsel gelöst!<br>" +
+                "Hier ist dein Geschenk! 🎁";
+
+            document.querySelector(".input-area").style.display = "none";
+
+            birthdayMessage.innerHTML = `
+                <div class="gift-box">
+                    🎁🎈🎊
+                </div>
+                <div style="margin-top: 20px; font-size: 1.3em;">
+                    Alles Gute zum Geburtstag! 🎂
+                </div>
+                <div style="margin-top: 30px;">
+                    <img src="qrcode (5).png" alt="Your Gift" style="width: 200px; border-radius: 10px; border: 3px solid #ff6b6b; box-shadow: 0 0 20px rgba(255,107,107,0.5);">
+                </div>
+            `;
+
+            createConfetti();
+            stage = 3; 
+
+        } else {
+            glitchSound.play();
+            errorSound.play();
+            result.style.color = "#ff6b6b";
+            result.innerText = "❌ WRONG ANSWER! Try again! ❌";
+            question.classList.add("glitch");
+            setTimeout(() => {
+                question.classList.remove("glitch");
+                result.innerText = "";
+            }, 1000);
+        }
+    }
+
+    if (stage !== 3) {
+        answerInput.value = "";
+    }
+}
                     
                     // Create massive confetti celebration
                     createConfetti();
