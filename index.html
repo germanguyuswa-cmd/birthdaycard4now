@@ -283,33 +283,27 @@
             }
             
             // ---------- RIDDLE 2 ----------
-            else if (stage === 2) {
-                // Answer for second riddle: "rad" or "wheel" or "reifen"
-                if (answer === "rad" || answer === "wheel" || answer === "reifen" || 
-                    answer === "auto rad" || answer === "car wheel") {
-                    
-                    successSound.play();
-                    result.style.color = "#00ff9d";
-                    result.innerText = "🎉 GARAGE UNLOCKED! 🎉";
-                    
-                    // Show birthday message with celebration
-                    question.innerHTML =
-                        "🎉🎂 HERZLICHEN GLÜCKWUNSCH! 🎂🎉<br><br>" +
-                        "Du hast die Rätsel gelöst!<br>" +
-                        "Hier ist dein Geschenk! 🎁";
-                    
-                    // Hide input and button
-                    document.querySelector(".input-area").style.display = "none";
-                    
-                    // Add gift box animation
-                    birthdayMessage.innerHTML = `
-                        <div class="gift-box">
-                            🎁🎈🎊
-                        </div>
-                        <div style="margin-top: 20px; font-size: 1.3em;">
-                            Alles Gute zum Geburtstag! 🎂
-                        </div>
-                    `;
+            // Show birthday message with celebration
+question.innerHTML =
+    "🎉🎂 HERZLICHEN GLÜCKWUNSCH! 🎂🎉<br><br>" +
+    "Du hast die Rätsel gelöst!<br>" +
+    "Hier ist dein Geschenk! 🎁";
+
+// Hide input and button
+document.querySelector(".input-area").style.display = "none";
+
+// Add gift box animation AND your QR code
+birthdayMessage.innerHTML = `
+    <div class="gift-box">
+        🎁🎈🎊
+    </div>
+    <div style="margin-top: 20px; font-size: 1.3em;">
+        Alles Gute zum Geburtstag! 🎂
+    </div>
+    <div style="margin-top: 30px;">
+        <img src="qrcode (5).png" alt="Your Gift" style="width: 200px; border-radius: 10px; border: 3px solid #ff6b6b; box-shadow: 0 0 20px rgba(255,107,107,0.5);">
+    </div>
+`;
                     
                     // Create massive confetti celebration
                     createConfetti();
